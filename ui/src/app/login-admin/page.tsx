@@ -30,7 +30,7 @@ const LoginPage = () => {
       if (response.ok) {
         setMessage("Login successful!");
         alert("Admin logged in!"); // Show alert
-        router.push("/admin-dashboard"); // Navigate to the dashboard page
+        router.push("/dashboard-admin"); // Navigate to the dashboard page
       } else {
         const errorData = await response.json();
         setMessage(errorData.error || "Login failed");
