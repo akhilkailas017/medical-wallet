@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Doctor=require("../models/doctors")
+const RegisterRequest=require("../models/registerRequest")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -11,9 +12,9 @@ router.post("/doctor-register", async (req, res) => {
   try {
    const { name,registrationNumber,yearOfRegistration,specialization,stateMedicalCouncil,password }=req.body;
    const hashedPassword = await bcrypt.hash(password, 10);
-   const doctor = new Doctor({name,registrationNumber,yearOfRegistration,specialization,stateMedicalCouncil,password:hashedPassword});
-   await doctor.save();
-    res.status(201).json({ message: "doctor registered successfully" });
+   const registerRequest = new RegisterRequest({name,registrationNumber,yearOfRegistration,specialization,stateMedicalCouncil,password:hashedPassword});
+   await registerRequest.save();
+    res.status(201).json({ message: "doctor registration request submit successfully" });
   } catch (error) {
     console.log("err", error);
     res.status(500).json({ error: "Registration failed" });

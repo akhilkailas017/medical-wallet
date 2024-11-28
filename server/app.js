@@ -3,7 +3,8 @@ const { mongoose } = require("mongoose");
 const app = express();
 const cors = require("cors");
 // const routes = require("./routes/routes");
-const auth=require('./routes/auth')
+const adminAuth=require("./routes/adminAuth")
+const doctorAuth=require('./routes/doctorAuth')
 const cookieParser =require('cookie-parser')
 // const adminRoutes = require("./routes/adminRoutes");
 require("dotenv").config();
@@ -22,7 +23,8 @@ app.use(cookieParser());
 
 
 // app.use("/", routes);
-app.use("/", auth);
+app.use("/", doctorAuth);
+app.use("/", adminAuth);
 // app.use("/admin", adminRoutes);
 
 

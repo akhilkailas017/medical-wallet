@@ -1,13 +1,15 @@
 "use client"; // Enables client-side rendering
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
   const [message, setMessage] = useState("");
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,14 +20,17 @@ const LoginPage = () => {
 
     try {
       // Call your API endpoint here
-      const response = await fetch("http://localhost:5000/login", {
+      const response = await fetch("http://localhost:5000/admin-login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
+        credentials: "include",
       });
 
       if (response.ok) {
         setMessage("Login successful!");
+        alert("Admin logged in!"); // Show alert
+        router.push("/admin-dashboard"); // Navigate to the dashboard page
       } else {
         const errorData = await response.json();
         setMessage(errorData.error || "Login failed");
@@ -42,17 +47,17 @@ const LoginPage = () => {
         <form onSubmit={handleSubmit}>
           {/* Email Field */}
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
               Email
             </label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
+              type="username"
+              id="username"
+              name="username"
+              value={formData.username}
               onChange={handleChange}
               className="mt-1 p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              placeholder="Enter your email"
+              placeholder="Enter your username"
               required
             />
           </div>
