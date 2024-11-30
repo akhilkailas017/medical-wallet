@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-// const Doctor=require("../models/doctors")
-// const RegisterRequest=require("../models/registerRequest")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -29,3 +27,9 @@ router.post("/admin-login", async (req, res) => {
 
 
 module.exports = router;
+
+
+// Admin username = admin
+// Admin Password = admin
+// Admin Hashed Password = $2a$10$vs0X45NtZet2dhTaT5DK4OprNwVTuO9aFF2Pn7CokMBl1n2VQ5cvW 
+
